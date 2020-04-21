@@ -53,6 +53,22 @@
   };
 
   const app = {
+    initMenu: function(){
+      const thisApp = this;
+
+      console.log('thisApp.data:', thisApp.data);
+      
+      for(let productData in thisApp.data.products){
+        new Product(productData, thisApp.data.products[productData]);
+      }
+      //const testProduct = new Product();
+      //console.log('testProduct:', testProduct);
+    },
+    initData: function(){
+      const thisApp = this;
+      
+      thisApp.data = dataSource;
+    },
     init: function(){
       const thisApp = this;
       console.log('*** App starting ***');
@@ -60,8 +76,68 @@
       console.log('classNames:', classNames);
       console.log('settings:', settings);
       console.log('templates:', templates);
+      
+      thisApp.initData();
+      thisApp.initMenu();
     },
   };
+  class Product{
+    constructor(id, data){
+      const thisProduct = this;
 
+      thisProduct.id = id;
+      thisProduct.data = data;
+
+      thisProduct.randerInMenu();
+
+      thisProduct.initAccordion();
+
+      console.log('new Product:', thisProduct);
+    }
+    randerInMenu(){
+      const thisProduct = this;
+      /*generate HTML based on template*/
+      const generatedHTML = templates.menuProduct(thisProduct.data);
+      console.log('generatedHTML:', generatedHTML);
+
+      /*create element using utils.createElementFromHTML*/
+      thisProduct.element = utils.createDOMFromHTML(generatedHTML);
+
+      /*find menu container*/
+      const menuContainer = document.querySelector(select.containerOf.menu);
+
+      /*add element to menu*/
+      menuContainer.appendChild(thisProduct.element);
+    }
+    initAccordion(){
+      const thisProduct = this;
+      /* find the clickable trigger (the element that should react to clicking) */
+      const clickableTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
+      /* START: click event listener to trigger */
+      clickableTrigger.addEventListener('click', function(){
+        console.log('clicked');
+      });
+        /* prevent default action for event */
+        
+        /* toggle active class on element of thisProduct */
+
+        /* find all active products */
+
+        /* START LOOP: for each active product */
+
+          /* START: if the active product isn't the element of thisProduct */
+
+            /* remove class active for the active product */
+
+          /* END: if the active product isn't the element of thisProduct */
+
+        /* END LOOP: for each active product */
+
+      /* END: click event listener to trigger */
+
+
+    }
+  }
   app.init();
+  
 }
