@@ -178,7 +178,7 @@
       console.log('formData:', formData);
       
       thisProduct.params = {};
-
+      
       /* set variable price to equal thisProduct.data.price */
       let price = thisProduct.data.price;
       console.log(price);
@@ -208,13 +208,14 @@
             price -= option.price;
           /* END ELSE IF: if option is not selected and option is default */
           }
-          console.log(price);
+          console.log(optionSelected);
         /* END LOOP: for each optionId in param.options */   
         }
       /* END LOOP: for each paramId in thisProduct.data.params */
       }
       /* set the contents of thisProduct.priceElem to be the value of variable price */
-      thisProduct.priceElem.classList.add(price);
+
+      thisProduct.priceElem.innerHTML = price;
       
     }
   }
