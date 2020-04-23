@@ -204,7 +204,7 @@
           }
           /* START ELSE IF: if option is not selected and option is default */
           /* deduct price of option from price */
-          else if (optionSelected && option.default) {
+          else if (!optionSelected && option.default) {
             price -= option.price;
           /* END ELSE IF: if option is not selected and option is default */
           }
