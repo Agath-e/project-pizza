@@ -123,6 +123,7 @@
       thisProduct.formInputs = thisProduct.form.querySelectorAll(select.all.formInputs);
       thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
       thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
+      thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
     }
     initAccordion(){
       const thisProduct = this;
@@ -206,8 +207,23 @@
           /* deduct price of option from price */
           else if (!optionSelected && option.default) {
             price -= option.price;
-          /* END ELSE IF: if option is not selected and option is default */
+          /* END ELSE IF: if option
+           is not selected and option is default */
           }
+          /*IF option is selected add class classNames.menuProduct.imageVisible*/
+          const optionImages = thisProduct.imageWrapper.querySelectorAll('.' + paramId + '-' + optionId);
+          if (optionSelected) {
+            for(let optionImage of optionImages) {
+              optionImage.classList.add(classNames.menuProduct.imageVisible);
+            }
+          }
+          else {
+            for(let optionImage of optionImages) {
+              optionImage.classList.remove(classNames.menuProduct.imageVisible);
+            }
+          }
+          /*ELSE option isn't selected remove class classNames.menuProduct.imageVisible*/
+
           console.log(optionSelected);
         /* END LOOP: for each optionId in param.options */   
         }
