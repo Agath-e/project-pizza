@@ -32,26 +32,26 @@
         linkIncrease: 'a[href="#more"]',
       },
     },
-      // CODE ADDED START
-      cart: {
-        productList: '.cart__order-summary',
-        toggleTrigger: '.cart__summary',
-        totalNumber: `.cart__total-number`,
-        totalPrice: '.cart__total-price strong, .cart__order-total .cart__order-price-sum strong',
-        subtotalPrice: '.cart__order-subtotal .cart__order-price-sum strong',
-        deliveryFee: '.cart__order-delivery .cart__order-price-sum strong',
-        form: '.cart__order',
-        formSubmit: '.cart__order [type="submit"]',
-        phone: '[name="phone"]',
-        address: '[name="address"]',
-      },
-      cartProduct: {
-        amountWidget: '.widget-amount',
-        price: '.cart__product-price',
-        edit: '[href="#edit"]',
-        remove: '[href="#remove"]',
-      },
-      // CODE ADDED END
+    // CODE ADDED START
+    cart: {
+      productList: '.cart__order-summary',
+      toggleTrigger: '.cart__summary',
+      totalNumber: `.cart__total-number`,
+      totalPrice: '.cart__total-price strong, .cart__order-total .cart__order-price-sum strong',
+      subtotalPrice: '.cart__order-subtotal .cart__order-price-sum strong',
+      deliveryFee: '.cart__order-delivery .cart__order-price-sum strong',
+      form: '.cart__order',
+      formSubmit: '.cart__order [type="submit"]',
+      phone: '[name="phone"]',
+      address: '[name="address"]',
+    },
+    cartProduct: {
+      amountWidget: '.widget-amount',
+      price: '.cart__product-price',
+      edit: '[href="#edit"]',
+      remove: '[href="#remove"]',
+    },
+    // CODE ADDED END
   };
 
   const classNames = {
