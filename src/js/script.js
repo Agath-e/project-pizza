@@ -430,7 +430,7 @@
       });
 
       thisCart.dom.productList.addEventListener('remove', function(){
-
+        thisCart.remove(event.detail.cartProduct);
       });
 
     }
@@ -471,23 +471,24 @@
       console.log(thisCart.totalPrice);
 
       for(let key of thisCart.renderTotalsKeys){
-        for(let elem of thisCart.dom[key]){//skąd wiadomo, że elem to wartość koszyka?
+        for(let elem of thisCart.dom[key]){
           elem.innerHTML = thisCart[key];
         }
       }
 
     }
-    /*remove(cartProduct){
+    remove(cartProduct){
       const thisCart = this;
 
-      const indexOfCartProduct = cartProduct.indexOf[thisCart.products];
+      const indexOfCartProduct = thisCart.products.indexOf(cartProduct);
 
-      cartProduct.splice(indexOfCartProduct, 1);
+      thisCart.products.splice(indexOfCartProduct, 1);
+      
+      cartProduct.dom.wrapper.remove();
+      
+      thisCart.update();
 
-      const cartProductwrapper = document.querySelector('');
-
-
-    }*/
+    }
   }
   class CartProduct{
     constructor(menuProduct, element) {
@@ -529,7 +530,7 @@
 
       thisCartProduct.amountWidget = new AmountWidget(thisCartProduct.dom.amountWidget);
 
-      thisCartProduct.dom.amountWidget.addEventListener('click', function(event) {
+      thisCartProduct.dom.amountWidget.addEventListener('updated', function(event) {
         event.preventDefault();
         thisCartProduct.amount = thisCartProduct.amountWidget.value;
         thisCartProduct.price = thisCartProduct.priceSingle * thisCartProduct.amount;
