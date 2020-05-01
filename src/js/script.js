@@ -352,7 +352,9 @@
       if(newValue != thisWidget.value && newValue <= settings.amountWidget.defaultMax && newValue >= settings.amountWidget.defaultMin) {
         thisWidget.value = newValue;
 
-        thisWidget.announce();
+        setTimeout(() => {
+          thisWidget.announce();
+        }, 0);
       }
 
       thisWidget.input.value = thisWidget.value;
@@ -362,7 +364,7 @@
 
       thisWidget.input.addEventListener('change', function(event) {
         event.preventDefault();
-        thisWidget.setValue(thisWidget); 
+        thisWidget.setValue(thisWidget.input.value); 
       });
       thisWidget.linkDecrease.addEventListener('click', function(event) {
         event.preventDefault();
