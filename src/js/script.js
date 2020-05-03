@@ -108,7 +108,7 @@
       const thisApp = this;
       
       //thisApp.data = dataSource;
-      thisApp.data = {},
+      thisApp.data = {};
       
       const url = settings.db.url + '/' + settings.db.product;
 
@@ -487,7 +487,7 @@
 
       for(let thisCartProduct of thisCart.products){
         thisCart.subtotalPrice += thisCartProduct.price;
-        thisCart.totalNumber += thisCartProduct.amount;
+        thisCart.totalNumber += thisCartProduct.amount.value || thisCartProduct.amount;
       }
 
       thisCart.totalPrice = thisCart.subtotalPrice + thisCart.deliveryFee;
