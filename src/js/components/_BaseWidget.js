@@ -24,9 +24,9 @@ class BaseWidget{
     if(newValue != thisWidget.correctValue && thisWidget.isValid(newValue)){
       thisWidget.correctValue = newValue;
 
-      setTimeout(() => {
-        thisWidget.announce();
-      }, 0);
+      
+      thisWidget.announce();
+     
     }
 
     thisWidget.renderValue();
