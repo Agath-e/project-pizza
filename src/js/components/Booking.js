@@ -128,7 +128,7 @@ export class Booking{
 
     let allAvailable = false;
 
-    if(typeof thisBooking.booked[thisBooking.date] == 'undefined' || typeof thisBooking.booked[thisBooking.date][thisBooking.hour] == 'undefined'){
+    if(!this.booking || !this.booking.booked || (this.booking.booked && (typeof thisBooking.booked[thisBooking.date] == 'undefined' || typeof thisBooking.booked[thisBooking.date][thisBooking.hour] == 'undefined'))){
       allAvailable = true;
     }
 
@@ -155,8 +155,6 @@ export class Booking{
         thisBooking.tableIsBooked = tableId;
       });
     }
-
-    
     
 
   }
@@ -181,7 +179,6 @@ export class Booking{
     thisBooking.dom.address = thisBooking.dom.wrapper.querySelector(select.booking.address);
     thisBooking.dom.starters = thisBooking.dom.wrapper.querySelectorAll(select.booking.starters);
   
-
 
   }
 
