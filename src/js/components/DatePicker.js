@@ -1,61 +1,54 @@
 /* global flatpickr */ // eslint-disable-line no-unused-vars
-
-import {settings, select} from '../settings.js';
 import utils from '../utils.js';
-import BaseWidget from './_BaseWidget.js';
+import {select, settings} from '../settings.js';
+import BaseWidget from './BaseWidget.js';
 
-class DatePicker extends BaseWidget{
-  constructor(wrapper){
+class DatePicker extends BaseWidget {
+  constructor(wrapper) {
     super(wrapper, utils.dateToStr(new Date()));
     const thisWidget = this;
 
     thisWidget.dom.input = thisWidget.dom.wrapper.querySelector(select.widgets.datePicker.input);
 
     thisWidget.initPlugin();
-
   }
-  initPlugin(){
+
+  initPlugin() {
     const thisWidget = this;
 
     thisWidget.minDate = new Date(thisWidget.value);
-    thisWidget.maxDate = new Date().fp_incr(settings.datePicker.maxDaysInFuture);
-
-    
-    const element = thisWidget.dom.input;
-    const options = {
+    thisWidget.maxDate = thisWidget.addDays(thisWidget.minDate, settings.datePicker.maxDaysInFuture);
+    flatpickr(thisWidget.dom.input, {
+      defaultDate: thisWidget.minDate,
       minDate: thisWidget.minDate,
       maxDate: thisWidget.maxDate,
+      locale: {
+        firstDayOfWeek: 1
+      },
       disable: [
         function(date) {
-          // return true to disable
           return (date.getDay() === 1);
         }
       ],
-      locale: {
-        firstDayOfWeek: 1,
-      },
       onChange: function(selectedDates, dateStr) {
         thisWidget.value = dateStr;
-      }
-    };
-    flatpickr(element, options);
-
-  }
-  addDays(date, days){
-    const dateObj = new Date(date);
-    dateObj.setDate(dateObj.getDate() + days);
-    return dateObj;
+      },
+    });
   }
 
-  parseValue(date){
+  addDays(date, days) {
+    var result = new Date(date);
+    result.setDate(result.getDate() + days);
+    return result;
+  }
+
+  parseValue(date) {
     return date;
   }
-
-  isValid(){
+  isValid() {
     return true;
   }
-
-  renderValue(){
+  renderValue() {
 
   }
 }

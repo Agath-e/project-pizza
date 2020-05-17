@@ -1,12 +1,10 @@
 /* global rangeSlider */ // eslint-disable-line no-unused-vars
-
-import {settings, select} from '../settings.js';
 import utils from '../utils.js';
-import BaseWidget from './_BaseWidget.js';
+import BaseWidget from './BaseWidget.js';
+import {select, settings} from '../settings.js';
 
-
-class HourPicker extends BaseWidget{
-  constructor(wrapper){
+class HourPicker extends BaseWidget {
+  constructor(wrapper) {
     super(wrapper, settings.hours.open);
     const thisWidget = this;
 
@@ -16,31 +14,28 @@ class HourPicker extends BaseWidget{
     thisWidget.initPlugin();
     thisWidget.value = thisWidget.dom.input.value;
   }
-  initPlugin(){
+
+  initPlugin() {
     const thisWidget = this;
 
-    thisWidget.dom.input.addEventListener('input', function(){
+    rangeSlider.create(thisWidget.dom.input);
+    thisWidget.dom.input.addEventListener('input', function() {
       thisWidget.value = thisWidget.dom.input.value;
     });
-
-    rangeSlider.create(thisWidget.dom.input);
-
-  }
-  parseValue(newValue){
-
-    return utils.numberToHour(newValue);
   }
 
-  isValid(){
+  parseValue(time) {
+    return utils.numberToHour(time);
+  }
+
+  isValid() {
     return true;
   }
 
-  renderValue(){
+  renderValue() {
     const thisWidget = this;
     thisWidget.dom.output.innerHTML = thisWidget.value;
   }
-
-
 }
 
 export default HourPicker;
