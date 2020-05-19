@@ -4,7 +4,7 @@ import AmountWidget from './AmountWidget.js';
 import DatePicker from './DatePicker.js';
 import HourPicker from './HourPicker.js';
 
-class Booking {
+export class Booking {
   constructor(element) {
     const thisBooking = this;
     thisBooking.starters = [];
@@ -157,6 +157,7 @@ class Booking {
       }
     }
     thisBooking.updateDOM();
+  
   }
 
   makeBooked(date, hour, duration, table) {
@@ -208,6 +209,7 @@ class Booking {
         table.classList.remove(classNames.booking.tableBooked);
       }
     }
+    thisBooking.rangeSliderActive();
   }
 
   render(element) {
@@ -223,6 +225,7 @@ class Booking {
     thisBooking.dom.HourPicker = thisBooking.dom.wrapper.querySelector(select.widgets.hourPicker.wrapper);
     thisBooking.dom.tables = thisBooking.dom.wrapper.querySelectorAll(select.booking.tables);
     thisBooking.dom.bookButton = thisBooking.dom.wrapper.querySelector(select.booking.form);
+    
   }
   initWidgets() {
     const thisBooking = this;
@@ -236,6 +239,38 @@ class Booking {
       thisBooking.updateDOM();
     });
   }
-}
 
-export default Booking;
+  rangeSliderActive() {
+    const thisBooking = this;
+
+    thisBooking.date = thisBooking.datePicker.value;
+    const bookedTimeRange = thisBooking.booked[thisBooking.date];
+
+
+
+    thisBooking.dom.rangeSlider = thisBooking.dom.wrapper.querySelector(select.widgets.hourPicker.slider);
+
+    
+
+    const sliderColors = [];
+
+    for(let bookedTime in bookedTimeRange) {
+      const min = 12;
+      const max = 24;
+      const step = 0.5;
+      const newValue = (((bookedTime - min) * 100) / (max - min));
+      const nextValue = (((bookedTime - min) + step) * 100) / (max - min);
+
+      if (bookedTime < max){
+        if(bookedTimeRange[bookedTime].length <= 1) {
+          sliderColors.push('/*' + bookedTime + '*/green' + newValue + '%, green' + nextValue + '%');
+        } else if (bookedTimeRange[bookedTime].length === 2) {
+          sliderColors.push('/*' + bookedTime + '*/orange' +  newValue +'%, orange' + nextValue + '%');
+        } else if (bookedTimeRange[bookedTime].length === 3) {
+          sliderColors.push('/*' + bookedTime + '*/red' + newValue + '%, red' + nextValue + '%');
+        }
+      }
+    }
+    sliderColors.sort();
+  }
+}

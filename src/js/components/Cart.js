@@ -101,6 +101,7 @@ class Cart {
       priceSingle: thisCartProduct.priceSingle,
       name: thisCartProduct.name,
     };
+    
   }
   add(menuProduct) {
     const thisCart = this;
@@ -110,6 +111,7 @@ class Cart {
     thisCart.dom.productList.appendChild(generatedDOM);
     thisCart.products.push(new CartProduct(menuProduct, generatedDOM));
     thisCart.update();
+   
   }
   remove(cartProduct) {
     const thisCart = this;
@@ -120,5 +122,6 @@ class Cart {
     thisCart.update();
   }
 }
+
 
 export default Cart;
