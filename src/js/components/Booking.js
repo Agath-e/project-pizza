@@ -273,4 +273,5 @@ export class Booking {
     }
     sliderColors.sort();
   }
+  
 }
